@@ -1,5 +1,3 @@
-#![feature(conservative_impl_trait)]
-extern crate failure;
 extern crate futures;
 extern crate telebot;
 extern crate tokio_core;
@@ -9,13 +7,10 @@ extern crate godfishbot_rust;
 use telebot::RcBot;
 use tokio_core::reactor::Core;
 use futures::stream::Stream;
-use futures::Future;
-use failure::Error;
 use std::env;
 
-use telebot::functions::*;
-
 use godfishbot_rust::config::*;
+use godfishbot_rust::text_commands::*;
 
 fn main() {
     println!("Starting godfishbot...");
@@ -39,15 +34,4 @@ fn main() {
 
     println!("Starting bot...");
     my_bot.run(&mut lp).unwrap();
-}
-
-fn handle_start(
-    (bot, msg): (RcBot, telebot::objects::Message),
-) -> impl Future<Item = (RcBot, telebot::objects::Message), Error = Error> {
-    let mut text = msg.text.unwrap().clone();
-    if text.is_empty() {
-        text = "<nix>".into();
-    }
-
-    bot.message(msg.chat.id, text).send()
 }
