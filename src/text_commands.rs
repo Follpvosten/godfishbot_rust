@@ -31,3 +31,11 @@ You can obtain the source code at https://github.com/Follpvosten/godfishbot_rust
 
     bot.message(msg.chat.id, text.to_string()).send()
 }
+
+pub fn handle_hello(
+    (bot, msg): (RcBot, objects::Message),
+) -> impl Future<Item = (RcBot, objects::Message), Error = Error> {
+    let text = format!("Hello, {} ( ͡° ͜ʖ ͡°)", msg.from.unwrap().first_name);
+
+    bot.message(msg.chat.id, text).send()
+}

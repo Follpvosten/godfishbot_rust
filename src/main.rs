@@ -30,9 +30,11 @@ fn main() {
     println!("Registering handlers...");
     let start_cmd = my_bot.new_cmd("/start").and_then(handle_start);
     let about_cmd = my_bot.new_cmd("/about").and_then(handle_about);
+    let hello_cmd = my_bot.new_cmd("/hello").and_then(handle_hello);
 
     my_bot.register(start_cmd);
     my_bot.register(about_cmd);
+    my_bot.register(hello_cmd);
 
     println!("Starting bot...");
     my_bot.run(&mut lp).unwrap();
