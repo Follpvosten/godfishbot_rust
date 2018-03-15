@@ -28,9 +28,11 @@ fn main() {
     let my_bot = RcBot::new(lp.handle(), &bot_config.bot_token).update_interval(200);
 
     println!("Registering handlers...");
-    let handle = my_bot.new_cmd("/start").and_then(handle_start);
+    let start_cmd = my_bot.new_cmd("/start").and_then(handle_start);
+    let about_cmd = my_bot.new_cmd("/about").and_then(handle_about);
 
-    my_bot.register(handle);
+    my_bot.register(start_cmd);
+    my_bot.register(about_cmd);
 
     println!("Starting bot...");
     my_bot.run(&mut lp).unwrap();
