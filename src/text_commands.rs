@@ -1,15 +1,13 @@
-extern crate futures;
-extern crate telebot;
-
-use self::telebot::RcBot;
-use self::futures::Future;
+use telebot::RcBot;
+use futures::Future;
 use failure::Error;
 
-use self::telebot::functions::*;
+use telebot::functions::*;
+use telebot::objects;
 
 pub fn handle_start(
-    (bot, msg): (RcBot, telebot::objects::Message),
-) -> impl Future<Item = (RcBot, telebot::objects::Message), Error = Error> {
+    (bot, msg): (RcBot, objects::Message),
+) -> impl Future<Item = (RcBot, objects::Message), Error = Error> {
     let mut text = msg.text.unwrap().clone();
     if text.is_empty() {
         text = "<nix>".into();
